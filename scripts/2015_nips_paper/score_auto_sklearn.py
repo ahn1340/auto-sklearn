@@ -32,14 +32,21 @@ ensemble_size = args.ensemble_size
 ensemble_nbest = args.ensemble_nbest
 nb_conf_metalearning = args.nb_conf_metalearning
 model_config = args.model_config
+
 if model_config == 1: # if vanilla, dont build ensemble.
     ensemble_size = 0
+    nb_conf_metalearning = 0
+    csv_name = 'score_vanilla.csv'
 elif model_config == 2: # if ensemble, build ensemble of size 50.
     ensemble_size = 50
+    nb_conf_metalearning = 0
+    csv_name = 'score_ensemble.csv'
 elif model_config == 3: # if metalearning, dont build ensemble,
     ensemble_size = 0
+    csv_name = 'score_metalearning.csv'
 elif model_config == 4: # if metalearning + ensemble,
     ensemble_size = 50
+    csv_name = 'score_ensemble_metalearning.csv'
 
 
 
@@ -75,7 +82,7 @@ automl.fit(X_train, y_train,
            X_test=X_test, y_test=y_test,
            metric=balanced_accuracy)
 
-with open(os.path.join(tmp_dir, "score_single_best.csv"), 'w') as fh:
+with open(os.path.join(tmp_dir, csv_name), 'w') as fh:
     T = 0
     fh.write("Time,Test Performance\n")
     for t, s in zip(automl.cv_results_['mean_fit_time'],
