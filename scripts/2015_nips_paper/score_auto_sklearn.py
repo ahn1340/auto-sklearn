@@ -15,9 +15,9 @@ parser.add_argument('--per-run-time-limit', type=int, required=True)
 parser.add_argument('--task-id', type=int, required=True)
 parser.add_argument('-s', '--seed', type=int, required=True)
 
-parser.add_argument('--ensemble_size', type=int, default=0)
+#parser.add_argument('--ensemble_size', type=int, default=0)
 parser.add_argument('--ensemble_nbest', type=int, default=50)
-parser.add_argument('--nb_conf_metalearning', type=int, required=True)
+#parser.add_argument('--nb_conf_metalearning', type=int, required=True)
 parser.add_argument('--model_config', type=int, required=True) # 1= vanilla, 2=ensemble, 3=metalearning, 4=ens+meta
 
 args = parser.parse_args()
