@@ -34,6 +34,7 @@ def read_files(directory, seed=None, n_jobs=1):
 
 
 def main(input_directories, output_file, seed, ensemble_size, n_jobs=1):
+    # input_directories: list of strings that contain folder path
     seed = None if seed is None or seed < 0 else int(seed)
     if isinstance(input_directories, str):
         input_directories = [input_directories]
@@ -128,6 +129,8 @@ def main(input_directories, output_file, seed, ensemble_size, n_jobs=1):
         for i in range(len(test_files)))
 
     # Create output csv file
+    print(output_file)
+    print(os.getcwd())
     with open(output_file, "w") as csv_file:
         fieldnames = ['Time', 'Training (Empirical) Performance',
                       'Test Set Performance', 'AC Overhead Time',

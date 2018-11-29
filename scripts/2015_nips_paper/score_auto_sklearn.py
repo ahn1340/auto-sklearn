@@ -18,6 +18,7 @@ parser.add_argument('-s', '--seed', type=int, required=True)
 parser.add_argument('--ensemble_size', type=int, default=0)
 parser.add_argument('--ensemble_nbest', type=int, default=50)
 parser.add_argument('--nb_conf_metalearning', type=int, required=True)
+parser.add_argument('--model_config', type=int, required=True) # 1= vanilla, 2=ensemble, 3=metalearning, 4=ens+meta
 
 args = parser.parse_args()
 
@@ -30,6 +31,16 @@ seed = args.seed
 ensemble_size = args.ensemble_size
 ensemble_nbest = args.ensemble_nbest
 nb_conf_metalearning = args.nb_conf_metalearning
+model_config = args.model_config
+if model_config == 1: # if vanilla, dont build ensemble.
+    ensemble_size = 0
+elif model_config == 2: # if ensemble, build ensemble of size 50.
+    ensemble_size = 50
+elif model_config == 3: # if metalearning, dont build ensemble,
+    ensemble_size = 0
+elif model_config == 4: # if metalearning + ensemble,
+    ensemble_size = 50
+
 
 
 configuration_output_dir = os.path.join(working_directory, str(seed))
